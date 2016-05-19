@@ -3,7 +3,7 @@ require "./image/*"
 module Image
 
   class TgaPixel
-    def initialize(@image, @pixel)
+    def initialize(@image : Tga, @pixel : Int32)
     end
     def blue
       @image.img_data[3 * @pixel + 0]
@@ -29,7 +29,7 @@ module Image
 
     getter width, height, img_data
 
-    def initialize(@width, @height)
+    def initialize(@width : Int32, @height : Int32)
       @img_data = Slice(UInt8).new(3 * @width * @height)
     end
 
@@ -64,7 +64,7 @@ module Image
         if w_lower && w_upper && h_lower && h_upper
           width = w_lower + 256 * w_upper
           height = h_lower + 256 * h_lower
-          img = new(width, height)
+          img = new(width.to_i, height.to_i)
 
           file.read_fully(img.img_data)
 

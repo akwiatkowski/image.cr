@@ -40,4 +40,27 @@ describe Image do
       img.img_data.should eq(img2.img_data)
     end
   end
+
+  it "creates 2x2 pixel image" do
+    filename = "test2.tga"
+
+    img = Image::Tga.new(2, 2)
+    img[0,0].blue = 255u8
+    img[0,0].red = 0u8
+    img[0,0].green = 0u8
+
+    img[1,0].blue = 0u8
+    img[1,0].red = 255u8
+    img[1,0].green = 0u8
+
+    img[0,1].blue = 0u8
+    img[0,1].red = 0u8
+    img[0,1].green = 255u8
+
+    img[1,1].blue = 255u8
+    img[1,1].red = 255u8
+    img[1,1].green = 0u8
+
+    img.write(filename)
+  end
 end
